@@ -1,5 +1,19 @@
+// ModelVideo Header
+// Group 13: DigiProf
+// Primary Coder: Harwinder
+// Modifiers: Andy
+// Modifications:
+// - Added Comments and Code Style
+// - Code Review and Testing
+// - Implemented MainActivity
+
 package com.example.digiprof;
 
+
+/**
+ * ModelVideo Class represents the video and its related information passed through from Firebase into the app.
+ * It allows the app to manage and display information about the video.
+ */
 public class ModelVideo {
     String id, title, timestamp, videoUrl;
 

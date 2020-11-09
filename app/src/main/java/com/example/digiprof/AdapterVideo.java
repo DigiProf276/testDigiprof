@@ -1,3 +1,12 @@
+// AdapterVideo Header
+// Group 13: DigiProf
+// Primary Coder: Harwinder
+// Modifiers: Andy
+// Modifications:
+// - Added Comments and Code Style
+// - Code Review and Testing
+// - Implemented AdapterVideo
+
 package com.example.digiprof;
 
 import android.content.Context;
@@ -18,18 +27,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.HolderVideo>{
+/**
+ * The AdapterVideo class shows all the videos that the user has uploaded, and handles video errors, playing the video,
+ * showcasing video components like how long the video has gone on for, etc.
+ */
+public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.HolderVideo> {
     //context
     private Context context;
     //arraylist
     private ArrayList<ModelVideo> videoArrayList;
 
     // constructor
-    public AdapterVideo(Context context, ArrayList<ModelVideo>videoArrayList){
+    public AdapterVideo(Context context, ArrayList<ModelVideo> videoArrayList) {
         this.context = context;
         this.videoArrayList = videoArrayList;
     }
 
+    // shows the videos that the user uploaded
     @NonNull
     @Override
     public HolderVideo onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,6 +53,7 @@ public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.HolderVideo>
 
     }
 
+    // Shows the videos metadata - day, time of recording
     @Override
     public void onBindViewHolder(@NonNull HolderVideo holder, int position) {
         // Get Format, set data, handle clicks, etc
@@ -59,11 +74,11 @@ public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.HolderVideo>
         //set Date
         holder.titleTv.setText(title);
         holder.timeTv.setText(formattedDateTime);
-        setVideoUri(modelVideo,holder);
-
+        setVideoUri(modelVideo, holder);
 
     }
 
+    // shows how much of the video you have watched, and its
     private void setVideoUri(ModelVideo modelVideo, final HolderVideo holder) {
         // Show Progress
         holder.progressBar.setVisibility(View.VISIBLE);
@@ -91,19 +106,18 @@ public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.HolderVideo>
             @Override
             public boolean onInfo(MediaPlayer mp, int what, int extra) {
                 // to check if buffering, rendering etc
-                switch (what){
-                    case MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START:{
+                switch (what) {
+                    case MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START: {
                         // rendering started
                         holder.progressBar.setVisibility(View.VISIBLE);
                         return true;
                     }
-                    case MediaPlayer.MEDIA_INFO_BUFFERING_START:{
-                        //Buffering Started
+                    case MediaPlayer.MEDIA_INFO_BUFFERING_START: {
+                        // Buffering Started
                         holder.progressBar.setVisibility(View.VISIBLE);
                         return true;
-
                     }
-                    case MediaPlayer.MEDIA_INFO_BUFFERING_END:{
+                    case MediaPlayer.MEDIA_INFO_BUFFERING_END: {
                         //Buffering ended
                         holder.progressBar.setVisibility(View.GONE);
                         return true;
@@ -127,7 +141,7 @@ public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.HolderVideo>
 
 
     // view holder class, initialize the UI views
-    class HolderVideo extends RecyclerView.ViewHolder{
+    class HolderVideo extends RecyclerView.ViewHolder {
 
         //UI Views of row_video.xml
         VideoView videoView;

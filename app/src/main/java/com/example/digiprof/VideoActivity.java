@@ -1,3 +1,11 @@
+// VideoActivity Header
+// Primary Coder: Harwinder
+// Modifiers: Andy
+// Modifications:
+// - Added Comments and Code Style
+// - Code Review and Testing
+// - Implemented VideoActivity
+
 package com.example.digiprof;
 
 import androidx.annotation.NonNull;
@@ -17,6 +25,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+
+/**
+ * VideoActivity Class - Initializes the main screen where the user can see all uploaded videos,
+ * loads the videos from firebase,
+ * and also shows a button that leads the user to upload a video
+ */
 public class VideoActivity extends AppCompatActivity {
     // UI Views
     FloatingActionButton addVideosBtn;
@@ -26,6 +40,7 @@ public class VideoActivity extends AppCompatActivity {
     //adapter
     private AdapterVideo adapterVideo;
 
+    // Initializes the main screen where all the videos can be seen, as well as the button to upload videos
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +60,13 @@ public class VideoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // start activity to add videos.
-                startActivity(new Intent(VideoActivity.this,AddVideoActivity.class));
+                startActivity(new Intent(VideoActivity.this, AddVideoActivity.class));
             }
         });
 
     }
 
+    // Loads videos from firebase into the screen
     private void loadVideosFromFirebase() {
         // initialize Array List before adding data into it
         videoArrayList = new ArrayList<>();
@@ -61,7 +77,7 @@ public class VideoActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // clear list before adding data into it
-                for(DataSnapshot ds: snapshot.getChildren()){
+                for (DataSnapshot ds : snapshot.getChildren()) {
                     //get Data
                     ModelVideo modelVideo = ds.getValue(ModelVideo.class);
                     // add model/data into list
